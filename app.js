@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const stuffRoutes = require('./routes/stuff')
+const userRoutes = require('./routes/user')
 
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.vxrbvet.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=${process.env.DB_NAME}`)
 	.then(() => console.log('Connexion à MongoDB réussie !'))
@@ -19,5 +20,6 @@ app.use((req, res, next) => {
 app.use(express.json())
 
 app.use('/api/stuff', stuffRoutes)
+app.use('/api/auth', userRoutes)
 
 module.exports = app
